@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import Loadable from 'react-loadable';
 import { StaticRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Provider as ReduxProvider } from 'react-redux';
 
 // import our main App component
 import App from '../../src/app/App';
@@ -20,7 +21,7 @@ const path = require("path");
 const fs = require("fs");
 
 
-const Renderer =() => (req, res, next) => {
+const Renderer = (store) => (req, res, next) => {
     // get the html file created with the create-react-app build
     const filePath = path.resolve(__dirname, '..', '..', 'build', 'index.html');
 
@@ -37,13 +38,18 @@ const Renderer =() => (req, res, next) => {
         // render the app as a string
         const html = ReactDOMServer.renderToString(
             <Loadable.Capture report={m => modules.push(m)}>
-                <StaticRouter location={req.baseUrl} context={routerContext}>
-                    <HelmetProvider context={helmetContext}>
-                        <App />
-                    </HelmetProvider>
-                </StaticRouter>
+                <ReduxProvider store={store}>
+                    <StaticRouter location={req.baseUrl} context={routerContext}>
+                        <HelmetProvider context={helmetContext}>
+                            <App />
+                        </HelmetProvider>
+                    </StaticRouter>
+                </ReduxProvider>
             </Loadable.Capture>
         );
+
+        // get the stringified state
+        const reduxState = JSON.stringify(store.getState());
 
         // map required assets to script tags
         const extraChunks = extractAssets(manifest, modules)
@@ -57,6 +63,8 @@ const Renderer =() => (req, res, next) => {
             htmlData
                 // write the React app
                 .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+                // write the string version of our state
+                .replace('__REDUX_STATE__={}', `__REDUX_STATE__=${reduxState}`)
                 // append the extra js assets
                 .replace('</body>', extraChunks.join('') + '</body>')
                 // write the HTML header tags

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loadable from 'react-loadable';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setMessage } from './store/appReducer';
 import AppRoutes from "./app.routes";
 import './App.css';
 
@@ -10,7 +12,14 @@ const AsyncComponent = Loadable({
 });
 
 
-function App() {
+function App(props) {
+
+  useEffect(() => {
+    if (!props.message) {
+      props.updateMessage("Hi, I'm from client!");
+    }
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -25,9 +34,9 @@ function App() {
         <hr />
 
         <h2>Part 2: Redux store</h2>
-        {/* <p>
-            Redux: {props.message}
-        </p> */}
+        <p>
+          Redux: {props.message}
+        </p>
 
         <hr />
 
@@ -43,4 +52,13 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(
+  connect(
+    ({ app }) => ({
+      message: app.message,
+    }),
+    dispatch => ({
+      updateMessage: (messageText) => dispatch(setMessage(messageText)),
+    })
+  )(App)
+);

@@ -4,17 +4,23 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import { HelmetProvider } from "react-helmet-async";
+import { Provider as ReduxProvider } from 'react-redux';
+import configureStore from './app/store/configureStore';
 import './index.css';
 import App from './app/App';
 
 
+const store = configureStore(window.__REDUX_STATE__ || {});
+
 const AppBundle = (
   <React.StrictMode>
-    <BrowserRouter>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </BrowserRouter>
+    <ReduxProvider store={store}>
+      <BrowserRouter>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </BrowserRouter>
+    </ReduxProvider>
   </React.StrictMode>
 );
 
