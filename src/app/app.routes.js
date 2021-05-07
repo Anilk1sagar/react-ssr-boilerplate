@@ -1,6 +1,6 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 const AsyncPageDefault = Loadable({
   loader: () => import('./pages/PageDefault'),
@@ -19,10 +19,13 @@ const NotFound = Loadable({
 
 
 const AppRoutes = () => {
+
+  const match = useRouteMatch();
+
   return (
     <Switch>
-      <Route path={`/another`} component={AsyncPageAnother} />
-      <Route path={`/`} component={AsyncPageDefault} />
+      <Route path={`${match.path}/another`} component={AsyncPageAnother} />
+      <Route path={`${match.path}`} component={AsyncPageDefault} />
       <Route component={NotFound} />
     </Switch>
   );
