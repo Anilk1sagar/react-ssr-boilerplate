@@ -1,7 +1,13 @@
 import React from 'react';
+import SEO from "../components/Seo";
 
 const NotFound = (props) => {
-  return <h1>404 Not Found, Oops, nothing here!</h1>;
+  return (
+    <>
+      <SEO title="Not Found Page" />
+      <h1> 404 Not Found, Oops, nothing here!</h1>
+    </>
+  );
 };
 
 export default NotFound;
