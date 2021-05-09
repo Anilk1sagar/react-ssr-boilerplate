@@ -1,22 +1,21 @@
-import React from 'react';
-import Loadable from 'react-loadable';
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import Loadable from "react-loadable";
+import { Route, Switch } from "react-router-dom";
 
 const AsyncPageDefault = Loadable({
-  loader: () => import('./pages/PageDefault'),
-  loading: () => <div>loading page...</div>
+  loader: () => import("./pages/PageDefault"),
+  loading: () => <div>loading page...</div>,
 });
 
 const AsyncPageAnother = Loadable({
-  loader: () => import('./pages/PageAnother'),
-  loading: () => <div>loading another page...</div>
+  loader: () => import("./pages/PageAnother"),
+  loading: () => <div>loading another page...</div>,
 });
 
 const NotFound = Loadable({
-  loader: () => import('./pages/NotFound'),
-  loading: () => <div>loading page not found...</div>
+  loader: () => import("./pages/NotFound"),
+  loading: () => <div>loading page not found...</div>,
 });
-
 
 const AppRoutes = () => {
   return (
@@ -26,6 +25,6 @@ const AppRoutes = () => {
       <Route component={NotFound} />
     </Switch>
   );
-}
+};
 
 export default AppRoutes;
