@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "craco start",
-    "build": "rm -rf build && craco build",
+    "start": "react-scripts start",
+    "start-craco": "craco start",
+    "build": "rm -rf build && react-script build",
+    "build-craco": "rm -rf build && craco build",
     "test": "craco test --env=jsdom",
     "eject": "react-scripts eject",
-    "start:ssr": "npm run build && node server/bootstrap.js",
+    "start:ssr": "npm run build-craco && node server/bootstrap.js",
     "server": "node server/bootstrap.js"
   },
   "dependencies": {

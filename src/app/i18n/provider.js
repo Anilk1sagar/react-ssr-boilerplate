@@ -4,7 +4,6 @@ import { IntlProvider } from "react-intl";
 import { LOCALES } from "./locales";
 import messages from "./messages";
 
-
 export default function Provider({ children, locale = LOCALES.en, ...rest }) {
   return (
     <IntlProvider
