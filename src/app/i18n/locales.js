@@ -1,6 +1,6 @@
 export const LOCALES = {
   en: "en",
-  ae: "ae"
+  ae: "ae",
 };
 
 export const DEFAULT_LOCALE = LOCALES.en;

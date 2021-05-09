@@ -2,8 +2,8 @@ import { LOCALES } from "../locales";
 
 const en = {
   [LOCALES.en]: {
-    heading: "Hello"
-  }
-}
+    heading: "Hello",
+  },
+};
 
 export default en;

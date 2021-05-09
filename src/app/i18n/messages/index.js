@@ -3,7 +3,7 @@ import ae from "./ae";
 
 const index = {
   ...en,
-  ...ae
-}
+  ...ae,
+};
 
 export default index;
