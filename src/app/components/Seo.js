@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Helmet } from "react-helmet-async";
 
 export default function SEO({
-  description = 'Get Rewards For Every Day You Drive Safe',
-  author = 'hala',
+  description = "Get Rewards For Every Day You Drive Safe",
+  author = "hala",
   meta,
-  title = 'Car Insurance in UAE',
+  title = "Car Insurance in UAE",
 }) {
   const metaData = [
     {

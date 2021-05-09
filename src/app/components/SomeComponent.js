@@ -1,12 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const SomeComponent = () => {
-    return (
-        <div>
-            Hi, I'm async.
-        </div>
-    )
-}
+  return <div>Hi, I'm async.</div>;
+};
 
 export default SomeComponent;
-

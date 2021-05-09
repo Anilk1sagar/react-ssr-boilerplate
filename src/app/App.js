@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react';
-import Loadable from 'react-loadable';
-import { NavLink, withRouter, useRouteMatch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useEffect } from "react";
+import Loadable from "react-loadable";
+import { NavLink, withRouter, useRouteMatch } from "react-router-dom";
+import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { I18Provider, LOCALES, DEFAULT_LOCALE } from "./i18n";
-import { setMessage } from './store/appReducer';
+import { setMessage } from "./store/appReducer";
 import SEO from "./components/Seo";
 import AppRoutes from "./app.routes";
-import './App.css';
+import "./App.css";
 
 const AsyncComponent = Loadable({
-  loader: () => import('./components/SomeComponent'),
-  loading: () => <div>loading...</div>
+  loader: () => import("./components/SomeComponent"),
+  loading: () => <div>loading...</div>,
 });
 
-
 function App({ history, ...props }) {
-
   const match = useRouteMatch();
 
   const { locale } = match.params;
@@ -38,13 +36,21 @@ function App({ history, ...props }) {
       <SEO title="Home Page" />
       <div className="App">
         <header className="App-header">
-          <img src="/assets/images/logo.svg" className="App-logo" alt="logo" width="200" height="200" />
+          <img
+            src="/assets/images/logo.svg"
+            className="App-logo"
+            alt="logo"
+            width="200"
+            height="200"
+          />
           <h1 className="App-title">Welcome to React</h1>
         </header>
 
         <div className="App-intro">
           <h2>Part Test Translation (react-intl)</h2>
-          <h3><FormattedMessage id="heading" /></h3>
+          <h3>
+            <FormattedMessage id="heading" />
+          </h3>
 
           <hr />
 
@@ -54,17 +60,21 @@ function App({ history, ...props }) {
           <hr />
 
           <h2>Part 2: Redux store</h2>
-          <p>
-            Redux: {props.message}
-          </p>
+          <p>Redux: {props.message}</p>
 
           <hr />
 
           <h2>Part 3: React router</h2>
           <nav>
-            <NavLink to={`${match.url}`} exact activeClassName="active">Home</NavLink>
-            <NavLink to={`${match.url}/another`} activeClassName="active">Another page</NavLink>
-            <NavLink to={`${match.url}/another/child`} activeClassName="active">Another page CHild</NavLink>
+            <NavLink to={`${match.url}`} exact activeClassName="active">
+              Home
+            </NavLink>
+            <NavLink to={`${match.url}/another`} activeClassName="active">
+              Another page
+            </NavLink>
+            <NavLink to={`${match.url}/another/child`} activeClassName="active">
+              Another page CHild
+            </NavLink>
           </nav>
           <AppRoutes />
         </div>
@@ -78,7 +88,7 @@ export default withRouter(
     ({ app }) => ({
       message: app.message,
     }),
-    dispatch => ({
+    (dispatch) => ({
       updateMessage: (messageText) => dispatch(setMessage(messageText)),
     })
   )(App)
