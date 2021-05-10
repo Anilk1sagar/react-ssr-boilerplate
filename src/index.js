@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Loadable from "react-loadable";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./app/store/configureStore";
-import { DEFAULT_LOCALE } from "./app/i18n";
 import "./index.css";
-import App from "./app/App";
+import AppWrapper from "./app/AppWrapper";
 
 const store = configureStore(window.__REDUX_STATE__ || {});
 
@@ -17,11 +16,7 @@ const AppBundle = (
     <ReduxProvider store={store}>
       <BrowserRouter>
         <HelmetProvider>
-          <Switch>
-            <Route path="/:locale" component={App} />
-            <Redirect to={`/${DEFAULT_LOCALE}`} />
-          </Switch>
-          {/* <App /> */}
+          <AppWrapper />
         </HelmetProvider>
       </BrowserRouter>
     </ReduxProvider>
