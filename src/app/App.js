@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import Loadable from "react-loadable";
 import { NavLink, withRouter, useRouteMatch } from "react-router-dom";
 import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
-import { I18Provider, LOCALES, DEFAULT_LOCALE } from "./i18n";
+import { useTranslation } from "react-i18next";
 import { setMessage } from "./store/appReducer";
 import SEO from "./components/Seo";
 import AppRoutes from "./app.routes";
@@ -17,22 +16,19 @@ const AsyncComponent = Loadable({
 function App({ history, ...props }) {
   const match = useRouteMatch();
 
-  const { locale } = match.params;
-  console.log(locale, match);
-
-  if (!Object.values(LOCALES).includes(locale)) {
-    history.push(`/${DEFAULT_LOCALE}`);
-  }
+  // const { locale } = match.params;
+  const { t, i18n } = useTranslation("common");
 
   useEffect(() => {
-    if (!props.message) {
+    // i18n.changeLanguage(locale);
+    if (!props.message && props.updateMessage) {
       props.updateMessage("Hi, I'm from client!");
     }
     // eslint-disable-next-line
   }, []);
 
   return (
-    <I18Provider locale={locale}>
+    <>
       <SEO title="Home Page" />
       <div className="App">
         <header className="App-header">
@@ -48,9 +44,8 @@ function App({ history, ...props }) {
 
         <div className="App-intro">
           <h2>Part Test Translation (react-intl)</h2>
-          <h3>
-            <FormattedMessage id="heading" />
-          </h3>
+
+          <h1>{t("title", { framework: "React" })}</h1>
 
           <hr />
 
@@ -79,7 +74,7 @@ function App({ history, ...props }) {
           <AppRoutes />
         </div>
       </div>
-    </I18Provider>
+    </>
   );
 }
 

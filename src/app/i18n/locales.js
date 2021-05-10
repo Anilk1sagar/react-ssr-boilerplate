@@ -1,6 +1,3 @@
-export const LOCALES = {
-  en: "en",
-  ae: "ae",
-};
+export const LOCALES = ["en", "ae"];
 
-export const DEFAULT_LOCALE = LOCALES.en;
+export const DEFAULT_LOCALE = "en";
