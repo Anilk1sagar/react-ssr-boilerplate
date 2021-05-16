@@ -16,11 +16,9 @@ const AsyncComponent = Loadable({
 function App({ history, ...props }) {
   const match = useRouteMatch();
 
-  // const { locale } = match.params;
-  const { t, i18n } = useTranslation("common");
+  const { t } = useTranslation("common");
 
   useEffect(() => {
-    // i18n.changeLanguage(locale);
     if (!props.message && props.updateMessage) {
       props.updateMessage("Hi, I'm from client!");
     }

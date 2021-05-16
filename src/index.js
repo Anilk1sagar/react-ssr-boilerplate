@@ -5,8 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import Loadable from "react-loadable";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider as ReduxProvider } from "react-redux";
+import { I18nextProvider } from "react-i18next";
 import configureStore from "./app/store/configureStore";
-import "./app/i18n/i18n";
+import i18n from "./app/i18n";
 import "./index.css";
 import AppWrapper from "./app/AppWrapper";
 
@@ -14,13 +15,15 @@ const store = configureStore(window.__REDUX_STATE__ || {});
 
 const AppBundle = (
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <BrowserRouter>
-        <HelmetProvider>
-          <AppWrapper />
-        </HelmetProvider>
-      </BrowserRouter>
-    </ReduxProvider>
+    <I18nextProvider i18n={i18n}>
+      <ReduxProvider store={store}>
+        <BrowserRouter>
+          <HelmetProvider>
+            <AppWrapper />
+          </HelmetProvider>
+        </BrowserRouter>
+      </ReduxProvider>
+    </I18nextProvider>
   </React.StrictMode>
 );
 

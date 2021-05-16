@@ -1,5 +1,5 @@
 import common from "./common.json";
 
-export const TRANSLATIONS_AE = {
+export const TRANSLATIONS_AR = {
   common,
 };

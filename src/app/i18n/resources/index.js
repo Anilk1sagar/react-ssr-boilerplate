@@ -1,8 +1,8 @@
-import { TRANSLATIONS_AE } from "./ae";
+import { TRANSLATIONS_AR } from "./ar";
 import { TRANSLATIONS_EN } from "./en";
 
 const RESOURCES = {
-  ae: TRANSLATIONS_AE,
+  ar: TRANSLATIONS_AR,
   en: TRANSLATIONS_EN,
 };
 

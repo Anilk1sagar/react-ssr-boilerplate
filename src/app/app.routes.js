@@ -22,8 +22,8 @@ const AppRoutes = () => {
 
   return (
     <Switch>
-      <Route path={`${match.path}/another`} component={AsyncPageAnother} />
-      <Route path={`${match.path}`} component={AsyncPageDefault} />
+      <Route exact path={`${match.path}/another`} component={AsyncPageAnother} />
+      <Route exact path={`${match.path}`} component={AsyncPageDefault} />
       <Route component={NotFound} />
     </Switch>
   );
