@@ -11,7 +11,7 @@ const CountryRoute = (props) => {
     return (
       <Redirect
         to={{
-          pathname: `/${CONFIG.defaultCountry}/${country}`,
+          pathname: `/${CONFIG.defaultCountry}${location.pathname}`,
           state: { from: location },
         }}
       />

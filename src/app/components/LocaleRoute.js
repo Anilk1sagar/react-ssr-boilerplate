@@ -12,7 +12,7 @@ const LocaleRoute = (props) => {
     return (
       <Redirect
         to={{
-          pathname: `/${country}/${CONFIG.defaultLocale}/${locale}`,
+          pathname: `/${country}/${CONFIG.defaultLocale}${location.state.from.pathname}`,
           state: { from: location },
         }}
       />
