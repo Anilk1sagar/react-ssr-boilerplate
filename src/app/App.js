@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { setMessage } from "./store/appReducer";
 import SEO from "./components/Seo";
-import AppRoutes from "./app.routes";
+import AppRoutes from "./AppRoutes";
 import "./App.css";
 
 const AsyncComponent = Loadable({

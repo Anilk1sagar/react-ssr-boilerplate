@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import { LOCALES, DEFAULT_LOCALE } from "./locales";
+import CONFIG from "../config";
 import RESOURCES from "./resources";
 
 i18next
@@ -12,12 +12,12 @@ i18next
   // init i18next
   .init({
     react: {
-      wait: true,
+      useSuspense: true,
     },
-    supportedLngs: LOCALES,
-    fallbackLng: DEFAULT_LOCALE,
-    lng: "ar",
-    debug: process.env.NODE_ENV === "development",
+    supportedLngs: CONFIG.locales,
+    fallbackLng: CONFIG.defaultLocale,
+    lng: CONFIG.defaultLocale,
+    debug: CONFIG.isDevelopment,
     keySeparator: false,
     interpolation: {
       escapeValue: false,
