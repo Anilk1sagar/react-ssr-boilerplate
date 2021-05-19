@@ -52,6 +52,5 @@ export default function SEO({
 }
 
 SEO.defaultProps = {
-  lang: `en`,
   meta: [],
 };
