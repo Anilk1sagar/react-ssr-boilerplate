@@ -8,8 +8,9 @@ import AppRoutes from "./app.routes";
 import "./App.css";
 
 const AsyncComponent = Loadable({
-  loader: () => import("./components/SomeComponent"),
+  loader: () => import(/* webpackChunkName: "SomeComponent" */ "./components/SomeComponent"),
   loading: () => <div>loading...</div>,
+  modules: ["SomeComponent"],
 });
 
 function App(props) {
@@ -17,7 +18,7 @@ function App(props) {
     if (!props.message) {
       props.updateMessage("Hi, I'm from client!");
     }
-  }, []);
+  }, [props]);
 
   return (
     <>

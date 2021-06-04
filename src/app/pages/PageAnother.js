@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import SEO from "../components/Seo";
+import axios from "axios";
 
 const PageAnother = (props) => {
   const match = useRouteMatch();
+
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/users`).then((res) => {
+      console.log("response: ", res);
+    });
+  }, []);
 
   return (
     <>

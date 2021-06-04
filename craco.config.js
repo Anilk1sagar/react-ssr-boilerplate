@@ -1,47 +1,53 @@
 const path = require("path");
 const glob = require("glob-all");
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const PurgecssPlugin = require("purgecss-webpack-plugin");
 
 const PATHS = {
   src: path.join(__dirname, "src"),
 };
 
+const LOG_WEBPACK_CONFIG = {
+  overrideWebpackConfig: ({ webpackConfig, pluginOptions }) => {
+    if (pluginOptions.log) {
+      console.log("Webpack configs: ", webpackConfig);
+    }
+    return webpackConfig;
+  },
+};
+
 module.exports = {
   webpack: {
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: "styles",
-            test: /\.css$/,
-            chunks: "all",
-            enforce: true,
-          },
-        },
+    configure: {
+      optimization: {
+        minimizer: [new UglifyJsPlugin({ sourceMap: true, parallel: true })],
+      },
+      module: {
+        rules: [],
       },
     },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
-        },
+    plugins: {
+      add: [
+        new BundleAnalyzerPlugin({ generateStatsFile: true }),
+        new PurgecssPlugin({
+          paths: [
+            "public/index.html",
+            ...glob.sync(`${PATHS.src}/**/**/*`, { nodir: true }),
+          ],
+        }),
       ],
+      remove: [],
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: "static/css/[name].[contenthash:8].css",
-        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
-        ignoreOrder: false,
-      }),
-      new PurgecssPlugin({
-        paths: [
-          "public/index.html",
-          ...glob.sync(`${PATHS.src}/**/**/*`, { nodir: true }),
-        ],
-      }),
-    ],
   },
+
+  // Craco Plugins
+  plugins: [
+    {
+      plugin: LOG_WEBPACK_CONFIG,
+      options: { log: false },
+    },
+  ],
 };
