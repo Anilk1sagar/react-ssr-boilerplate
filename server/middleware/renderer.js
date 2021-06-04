@@ -6,7 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { Provider as ReduxProvider } from "react-redux";
 
 // import our main App component
-import App from "../../src/app/App";
+import AppWrapper from "../../src/app/AppWrapper";
 
 // import the manifest generated with the create-react-app build
 import manifest from "../../build/asset-manifest.json";
@@ -40,7 +40,7 @@ const Renderer = (store) => (req, res, next) => {
         <ReduxProvider store={store}>
           <StaticRouter location={req.baseUrl} context={routerContext}>
             <HelmetProvider context={helmetContext}>
-              <App />
+              <AppWrapper />
             </HelmetProvider>
           </StaticRouter>
         </ReduxProvider>
