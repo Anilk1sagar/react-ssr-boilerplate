@@ -7,15 +7,19 @@ import manifest from "../../build/asset-manifest.json";
  * @param {string[]} modules
  */
 const extractModulesChunks = (assets, modules) => {
-  // Styles
-  const chunksCss = assets
-    .filter((asset) => modules.indexOf(asset.replace(".css", "")) > -1)
-    .map((k) => manifest.files[k]);
+  const chunksCss = [];
+  const chunksJs = [];
 
-  // Scripts
-  const chunksJs = assets
-    .filter((asset) => modules.indexOf(asset.replace(".js", "")) > -1)
-    .map((k) => manifest.files[k]);
+  assets.forEach((asset) => {
+    // Styles
+    if (modules.indexOf(asset.replace(".css", "")) > -1) {
+      chunksCss.push(manifest.files[asset]);
+    }
+    // Scripts
+    if (modules.indexOf(asset.replace(".js", "")) > -1) {
+      chunksJs.push(manifest.files[asset]);
+    }
+  });
 
   return { css: chunksCss, js: chunksJs };
 };
@@ -54,7 +58,7 @@ export const AttachChunksToHtml = (htmlData, modules) => {
         `<link href="${manifest.files["main.css"]}" rel="stylesheet">`,
         ""
       )
-      // Remove license and main chunk scripts 
+      // Remove license and main chunk scripts
       .replace(`<script src="${licenseChunk}"></script>`, "")
       .replace(`<script src="${manifest.files["main.js"]}"></script>`, "")
       // Append the style and script assets
