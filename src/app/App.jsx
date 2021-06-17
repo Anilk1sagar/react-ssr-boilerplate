@@ -4,7 +4,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { setMessage } from "./store/appReducer";
 import SEO from "./components/Seo";
-import AppRoutes from "./app.routes";
+import AppRoutes from "./AppRoutes";
 import "./App.css";
 
 const AsyncComponent = Loadable({

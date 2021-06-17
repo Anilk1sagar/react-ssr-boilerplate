@@ -4,7 +4,7 @@ import Loadable from "react-loadable";
 import { StaticRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider as ReduxProvider } from "react-redux";
-import App from "../../src/app/App";
+import App from "../../src/app/App.jsx";
 import { AttachChunksToHtml } from "../helpers";
 
 const path = require("path");
