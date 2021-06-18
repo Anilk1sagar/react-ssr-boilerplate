@@ -1,9 +1,11 @@
-require("ignore-styles");
+const path = require("path");
+
 require("url-loader");
 require("file-loader");
-const path = require("path");
+
+// Babel Configs
 require("@babel/register")({
-  ignore: [/(node_modules)/],
+  ignore: [/(node_modules)/, ".css"],
   presets: ["@babel/preset-env", "@babel/preset-react"],
   plugins: [
     "syntax-dynamic-import",
@@ -17,6 +19,17 @@ require("@babel/register")({
         },
       },
     ],
+    [
+      "babel-plugin-transform-import-ignore",
+      {
+        patterns: [".css", ".scss"],
+      },
+    ],
   ],
 });
+
+// Ignore styles for server
+require("ignore-styles");
+
+// Run Server
 require("./index");

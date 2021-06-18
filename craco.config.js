@@ -1,8 +1,6 @@
 const path = require("path");
 const glob = require("glob-all");
 
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const PurgecssPlugin = require("purgecss-webpack-plugin");
 
@@ -31,11 +29,6 @@ module.exports = {
     },
     plugins: {
       add: [
-        new BundleAnalyzerPlugin({
-          generateStatsFile: true,
-          analyzerMode: "static",
-          openAnalyzer: false,
-        }),
         new PurgecssPlugin({
           paths: [
             "public/index.html",

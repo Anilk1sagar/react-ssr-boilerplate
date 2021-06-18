@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "craco start",
-    "build": "rm -rf build && craco build",
-    "build:analyze": "webpack-bundle-analyzer build/stats.json",
+    "build": "rm -rf build && craco build --stats",
+    "build:analyze": "webpack-bundle-analyzer build/bundle-stats.json",
     "test": "craco test --env=jsdom",
     "eject": "react-scripts eject",
     "start:ssr": "npm run build && node server/bootstrap.js",
@@ -33,6 +33,7 @@
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-import-ignore": "^1.1.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
