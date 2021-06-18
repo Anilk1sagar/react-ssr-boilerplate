@@ -9,7 +9,6 @@ const path = require("path");
 const actionIndex = (req, res, next) => {
   const store = configureStore();
 
-  // This thing is slowing down server
   store.dispatch(setAsyncMessage("Hi, I'm from server!")).then(() => {
     serverRenderer(store)(req, res, next);
   });

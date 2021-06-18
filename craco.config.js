@@ -31,11 +31,7 @@ module.exports = {
     },
     plugins: {
       add: [
-        new BundleAnalyzerPlugin({
-          generateStatsFile: true,
-          analyzerMode: "static",
-          openAnalyzer: false,
-        }),
+        new BundleAnalyzerPlugin({ generateStatsFile: true }),
         new PurgecssPlugin({
           paths: [
             "public/index.html",
